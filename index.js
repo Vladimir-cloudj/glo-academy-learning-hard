@@ -9,6 +9,7 @@ console.log("Исходное число:", num, typeof num);
 const digits = num.toString().split("");
 console.log("Цифры числа:", digits);
 
+
 const product = digits.reduce((acc, digit) => acc * Number(digit), 1);
 console.log("Произведение цифр:", product);
 
