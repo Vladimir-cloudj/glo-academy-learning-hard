@@ -1,0 +1,13 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+.day {
+    margin: 5px 0;
+}
+.weekend {
+    font-style: italic;
+}
+.current-day {
+    font-weight: bold;
+}
