@@ -41,7 +41,6 @@
             background: #da190b;
         }
 
-        /* Контейнер для анимации */
         #canvas {
             width: 400px;
             height: 300px;
@@ -51,8 +50,6 @@
             position: relative;
             overflow: hidden;
         }
-
-        /* Наш анимируемый объект */
         #ball {
             width: 40px;
             height: 40px;
@@ -61,6 +58,5 @@
             position: absolute;
             left: 0;
             bottom: 0;
-            /* Тень для красоты */
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
