@@ -1,0 +1,66 @@
+/* Простая стилизация */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+            background: #f5f5f5;
+        }
+
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background: #4CAF50;
+            color: white;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        button.reset {
+            background: #f44336;
+        }
+
+        button.reset:hover {
+            background: #da190b;
+        }
+
+        /* Контейнер для анимации */
+        #canvas {
+            width: 400px;
+            height: 300px;
+            background: white;
+            border: 2px solid #333;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Наш анимируемый объект */
+        #ball {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            /* Тень для красоты */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
