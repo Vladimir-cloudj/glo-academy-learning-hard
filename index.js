@@ -1,22 +1,93 @@
-// 1) Создать переменную num со значением 266219 (тип данных число)
-const num = 266219;
-console.log("Исходное число:", num, typeof num);
+const gridPuzzle = () => {
+  const blocks = document.querySelectorAll(".block");
+  const resetBtn = document.querySelector(".btn-reset");
 
-// 2) Вывести в консоль произведение (умножение) цифр этого числа
-// Преобразуем число в строку, разбиваем на массив символов,
-// преобразуем каждый символ в число и перемножаем
+  const parent = document.querySelector(".square-body");
+  const initialOrder = Array.from(blocks);
 
-const digits = num.toString().split("");
-console.log("Цифры числа:", digits);
+  const COLS = 5;
 
-const product = digits.reduce((acc, digit) => acc * Number(digit), 1);
-console.log("Произведение цифр:", product);
+  function getNeighbor(block, direction) {
+    const allBlocks = Array.from(parent.querySelectorAll(".block"));
+    const currentIndex = allBlocks.indexOf(block);
 
-// 3) Полученный результат возвести в степень 3, используя только 1 оператор (**)
-const powered = product ** 3;
-console.log("Результат возводим в степень 3:", powered);
+    let neighborIndex = -1;
 
-// 4) Вывести в консоль первые 2 цифры полученного числа
-const firstTwoDigits = powered.toString().slice(0, 2);
-console.log("Первые 2 цифры результата:", firstTwoDigits);
+    switch (direction) {
+      case "top":
+        neighborIndex = currentIndex - COLS;
+        if (neighborIndex < 0) return null;
+        break;
 
+      case "bottom":
+        neighborIndex = currentIndex + COLS;
+        if (neighborIndex >= allBlocks.length) return null;
+        break;
+
+      case "left":
+        neighborIndex = currentIndex - 1;
+        if (currentIndex % COLS === 0) {
+          neighborIndex = currentIndex - 1;
+          if (neighborIndex < 0) return null;
+        }
+        break;
+
+      case "right":
+        neighborIndex = currentIndex + 1;т
+        if ((currentIndex + 1) % COLS === 0) {
+          if (neighborIndex >= allBlocks.length) return null;
+        }
+        break;
+    }
+
+    if (neighborIndex >= 0 && neighborIndex < allBlocks.length) {
+      return allBlocks[neighborIndex];
+    }
+
+    return null;
+  }
+
+  function swapBlocks(block1, block2) {
+    const temp = document.createElement("div");
+    block1.parentNode.insertBefore(temp, block1);
+    block2.parentNode.insertBefore(block1, block2);
+    temp.parentNode.insertBefore(block2, temp);
+    temp.remove();
+  }
+
+  function resetGrid() {
+    initialOrder.forEach((block) => {
+      parent.appendChild(block);
+    });
+  }
+
+  blocks.forEach((block) => {
+    const arrows = block.querySelectorAll(".arrow");
+
+    arrows.forEach((arrow) => {
+      arrow.addEventListener("click", (e) => {
+        e.stopPropagation();
+
+        let direction = "";
+        if (arrow.classList.contains("top")) direction = "top";
+        else if (arrow.classList.contains("bottom")) direction = "bottom";
+        else if (arrow.classList.contains("left")) direction = "left";
+        else if (arrow.classList.contains("right")) direction = "right";
+
+        if (!direction) return;
+
+        const neighbor = getNeighbor(block, direction);
+
+        if (neighbor) {
+          swapBlocks(block, neighbor);
+        }
+      });
+    });
+  });
+
+  if (resetBtn) {
+    resetBtn.addEventListener("click", resetGrid);
+  }
+};
+
+gridPuzzle();
